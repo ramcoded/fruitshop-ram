@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshFruit — Premium Fruits Delivered</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="#">🍓 FreshFruit</a>
+      <div class="nav-links">
+        <a href="#products">Shop</a>
+        <a href="#features">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-icon cart-btn" id="cartBtn" title="Cart">
+          🛒<span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="btn-outline" id="loginBtn" onclick="openModal('loginModal')">Sign In</button>
+        <div class="user-menu hidden" id="userMenu">
+          <span id="usernameDisplay"></span>
+          <button class="btn-outline" onclick="logout()">Logout</button>
+        </div>
+        <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#products" onclick="toggleMobileNav()">Shop</a>
+    <a href="#features" onclick="toggleMobileNav()">About</a>
+    <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+    <div class="mobile-nav-actions">
+      <div class="mobile-user hidden" id="mobileUserSection">
+        <span id="mobileUser" style="font-size:14px;font-weight:600;color:var(--primary-dark)"></span>
+        <button class="btn-primary" onclick="logout(); toggleMobileNav()">Logout</button>
+      </div>
+      <button class="btn-primary" id="mobileLogin" onclick="openModal('loginModal'); toggleMobileNav()">Sign In</button>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="badge">🌿 100% Organic &amp; Farm Fresh</div>
+        <h1>Premium Fruits <span class="gradient-text">Delivered</span> To Your Door</h1>
+        <p>Handpicked seasonal fruits from local farms. Crisp, sweet, and delivered same-day — straight from the orchard to you.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="scrollToProducts()">Shop Now &rarr;</button>
+          <button class="btn-ghost" onclick="openModal('registerModal')">
+            <span>&#9654;</span> Get Started Free
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>500+</strong><span>Products</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>10k+</strong><span>Customers</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><strong>4.9&#9733;</strong><span>Rating</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-blob"></div>
+        <div class="visual-center">🫐</div>
+
+        <div class="orbit-dot" style="--x: 0px; --y: -185px; --delay: 0s">🍎</div>
+        <div class="orbit-dot" style="--x: 160px; --y: -92px; --delay: 0.5s">🍊</div>
+        <div class="orbit-dot" style="--x: 160px; --y: 92px; --delay: 1s">🍇</div>
+        <div class="orbit-dot" style="--x: 0px; --y: 185px; --delay: 1.5s">🍓</div>
+        <div class="orbit-dot" style="--x: -160px; --y: 92px; --delay: 2s">🥭</div>
+        <div class="orbit-dot" style="--x: -160px; --y: -92px; --delay: 2.5s">🍌</div>
+
+        <div class="float-badge fb1">
+          <span>🚚</span>
+          <div><strong>Free Delivery</strong><small>Orders $30+</small></div>
+        </div>
+        <div class="float-badge fb2">
+          <span>⭐</span>
+          <div><strong>Top Rated</strong><small>4.9 / 5.0</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Fresh <span class="gradient-text">Collection</span></h2>
+        <p>Explore our handpicked seasonal selection, delivered daily</p>
+      </div>
+      <div class="category-pills" id="categoryPills"></div>
+      <div class="products-grid" id="productsGrid"></div>
+      <div class="admin-actions hidden" id="adminActions">
+        <button class="btn-primary" onclick="openModal('addFruitModal')">+ Add New Fruit</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROMO BANNER ===== -->
+  <section class="promo-banner">
+    <div class="container">
+      <div class="promo-content">
+        <div class="promo-text">
+          <h2>Get 20% Off Your First Order!</h2>
+          <p>Use code <strong>FRESH20</strong> at checkout &mdash; limited time offer</p>
+        </div>
+        <button class="btn-white" onclick="scrollToProducts()">Claim Offer</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose <span class="gradient-text">FreshFruit?</span></h2>
+        <p>We're committed to bringing you the best quality every time</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3>Free Delivery</h3>
+          <p>Free same-day delivery on all orders over $30</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h3>100% Organic</h3>
+          <p>All products are certified organic and pesticide-free</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💯</div>
+          <h3>Freshness Guarantee</h3>
+          <p>Not fresh? We'll replace it free of charge, no questions asked</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure Payment</h3>
+          <p>SSL-encrypted checkout with multiple payment methods</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">🍓 FreshFruit</div>
+          <p>Your local premium fruit delivery service. Fresh from the farm to your doorstep, every single day.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#products">All Fruits</a></li>
+            <li><a href="#products">Seasonal Picks</a></li>
+            <li><a href="#products">Organic Selection</a></li>
+            <li><a href="#products">Gift Baskets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#">&#128248; Instagram</a>
+            <a href="#">&#128240; Facebook</a>
+            <a href="#">&#128038; Twitter</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 FreshFruit. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL: LOGIN ===== -->
+  <div class="modal-overlay hidden" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('loginModal')">&#215;</button>
+      <h2>Welcome Back &#128075;</h2>
+      <p class="modal-subtitle">Sign in to your account</p>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" placeholder="Enter your username" required autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn-primary btn-full">Sign In</button>
+      </form>
+      <p class="modal-footer-text">
+        Don't have an account?
+        <a href="#" onclick="switchModal('loginModal','registerModal')">Register free</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: REGISTER ===== -->
+  <div class="modal-overlay hidden" id="registerModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('registerModal')">&#215;</button>
+      <h2>Create Account &#127827;</h2>
+      <p class="modal-subtitle">Join thousands of happy customers</p>
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="registerUsername">Username</label>
+          <input type="text" id="registerUsername" placeholder="Choose a username" required autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" placeholder="Choose a password" required autocomplete="new-password" />
+        </div>
+        <button type="submit" class="btn-primary btn-full">Create Account</button>
+      </form>
+      <p class="modal-footer-text">
+        Already have an account?
+        <a href="#" onclick="switchModal('registerModal','loginModal')">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: ADD FRUIT ===== -->
+  <div class="modal-overlay hidden" id="addFruitModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('addFruitModal')">&#215;</button>
+      <h2>Add New Fruit &#127822;</h2>
+      <p class="modal-subtitle">Add a product to the store</p>
+      <form onsubmit="handleAddFruit(event)">
+        <div class="form-group">
+          <label for="fruitName">Fruit Name</label>
+          <input type="text" id="fruitName" placeholder="e.g. Mango, Strawberry..." required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fruitWeight">Weight (kg)</label>
+            <input type="number" id="fruitWeight" placeholder="0.5" step="0.01" min="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="fruitPrice">Price ($)</label>
+            <input type="number" id="fruitPrice" placeholder="2.99" step="0.01" min="0.01" required />
+          </div>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Add Fruit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: EDIT FRUIT ===== -->
+  <div class="modal-overlay hidden" id="editFruitModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('editFruitModal')">&#215;</button>
+      <h2>Edit Fruit &#9999;&#65039;</h2>
+      <p class="modal-subtitle">Update product details</p>
+      <input type="hidden" id="editFruitId" />
+      <form onsubmit="handleEditFruit(event)">
+        <div class="form-group">
+          <label for="editFruitName">Fruit Name</label>
+          <input type="text" id="editFruitName" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="editFruitWeight">Weight (kg)</label>
+            <input type="number" id="editFruitWeight" step="0.01" min="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="editFruitPrice">Price ($)</label>
+            <input type="number" id="editFruitPrice" step="0.01" min="0.01" required />
+          </div>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== CART SIDEBAR ===== -->
+  <div class="cart-overlay hidden" id="cartOverlay" onclick="closeCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Cart &#128722;</h3>
+      <button class="cart-close" onclick="closeCart()">&#215;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cartTotal">$0.00</strong>
+      </div>
+      <button class="btn-primary btn-full" onclick="checkout()">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

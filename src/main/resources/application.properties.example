@@ -1,0 +1,9 @@
+spring.application.name=fruitshop
+spring.datasource.url=jdbc:postgresql://<host>:5432/postgres?sslmode=require
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+
+jwt.secret=<at-least-32-character-random-secret>
+jwt.expiration-ms=86400000

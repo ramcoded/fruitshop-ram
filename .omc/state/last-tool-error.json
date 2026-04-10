@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"D:/Agentic/fruitshop-ram\\\" && git status 2>&1; echo \\\"---\\\"; gh auth status 2>&1\",\"description\":\"Check git status and gh auth\"}",
-  "error": "Exit code 127\nfatal: not a git repository (or any of the parent directories): .git\n---\n/usr/bin/bash: line 1: gh: command not found",
-  "timestamp": "2026-04-10T00:52:54.735Z",
-  "retry_count": 1
-}
